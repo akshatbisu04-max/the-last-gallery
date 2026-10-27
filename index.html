@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101315">
+  <meta name="description" content="The Last Gallery — an interactive detective mystery.">
+  <title>The Last Gallery — A Detective Mystery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main id="app" class="app-shell">
+    <section id="title-screen" class="title-screen screen active" aria-label="Main menu">
+      <div class="title-art" aria-hidden="true"><div class="moon"></div><div class="gallery-silhouette"></div><div class="art-frame"><div class="art-glow"></div></div><div class="rain"></div></div>
+      <header class="title-top"><span class="brand-mark">✦</span><span>NOCTURNE INTERACTIVE</span><span class="edition">CASE FILE 001</span></header>
+      <div class="title-copy"><p class="eyebrow">A STORY-DRIVEN DETECTIVE GAME</p><h1>The Last<br><em>Gallery</em></h1><p class="title-sub">One stormy night. One impossible theft.<br>Every detail tells a story.</p>
+        <div class="menu-actions"><button id="new-game" class="btn btn-primary"><span>Begin investigation</span><span>↗</span></button><button id="continue-game" class="btn btn-quiet" hidden>Continue case <span>→</span></button><button id="how-to-play" class="text-button">How to play <span>↗</span></button></div>
+      </div>
+      <footer class="title-footer"><span>AN ORIGINAL INTERACTIVE MYSTERY</span><span>BEST EXPERIENCED WITH SOUND</span></footer>
+      <div id="how-modal" class="modal-backdrop" hidden><section class="modal"><button class="modal-close" data-close-modal aria-label="Close">×</button><p class="eyebrow">FIELD GUIDE</p><h2>Read the room.</h2><p>Explore locations, question the people inside them, and inspect anything that feels out of place. Your case file saves every clue you find.</p><p>When you are ready, open the evidence board and connect the facts. The final accusation depends on what you can prove—not just what you suspect.</p><button class="btn btn-primary" data-close-modal>Got it <span>→</span></button></section></div>
+    </section>
+
+    <section id="game-screen" class="game-screen screen" aria-label="Game">
+      <header class="game-header"><button class="wordmark" id="go-menu"><span class="brand-mark">✦</span> THE LAST GALLERY</button><div class="case-label"><span class="live-dot"></span> CASE 01 <span class="divider">/</span> THE BLUE HOUR</div><div class="header-actions"><button class="icon-button" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound">♫</button><button class="header-button" id="save-indicator">CASE SAVED <span class="save-dot"></span></button></div></header>
+      <div class="game-layout">
+        <aside class="left-rail"><div class="rail-heading">INVESTIGATION</div><div class="progress-wrap"><div class="progress-meta"><span>CASE PROGRESS</span><span id="progress-label">00%</span></div><div class="progress-track"><span id="progress-bar"></span></div></div><nav id="location-nav" class="location-nav" aria-label="Locations"></nav><div class="rail-bottom"><button id="journal-open" class="rail-link"><span class="rail-icon">▤</span> Case journal <span class="rail-count" id="journal-count">0</span></button><button id="evidence-open" class="rail-link"><span class="rail-icon">⌕</span> Evidence board <span class="rail-count" id="evidence-count">0</span></button></div></aside>
+        <section class="scene-column"><div class="scene-topline"><span id="scene-location" class="scene-location">THE GRAND GALLERY</span><span id="scene-time" class="scene-time">11:47 PM <i>•</i> RAINING</span></div><div id="scene-art" class="scene-art"><div class="scene-overlay"></div><div class="scene-vignette"></div><div id="scene-caption" class="scene-caption"></div><div class="scene-art-credit">NORTH WING <span>—</span> 01</div></div><div class="story-panel"><div class="story-meta"><span id="scene-kicker" class="eyebrow">THE SCENE</span><span id="clue-flash" class="clue-flash" aria-live="polite"></span></div><h2 id="scene-title">The Blue Hour</h2><div id="scene-text" class="story-text"></div><div id="choice-list" class="choice-list"></div></div></section>
+        <aside class="right-rail"><div class="rail-heading">YOUR CASE FILE <span class="file-status">ACTIVE</span></div><div class="detective-card"><div class="detective-avatar">D</div><div><div class="detective-name">DETECTIVE</div><div class="detective-rank">CONSULTING · NIGHT SHIFT</div></div></div><div class="side-section"><div class="side-title">PEOPLE OF INTEREST <span id="suspect-total">03</span></div><div id="suspect-list" class="suspect-list"></div></div><div class="side-section recent-section"><div class="side-title">RECENT EVIDENCE <button id="view-all-evidence">VIEW ALL ↗</button></div><div id="recent-evidence" class="recent-evidence"></div></div><div class="case-note"><span class="note-mark">“</span><p id="case-note-text">The truth is rarely hidden. It is usually overlooked.</p><span class="note-byline">— CASE NOTES</span></div><button id="accuse-open" class="btn btn-outline accuse-button">Make an accusation <span>↗</span></button></aside>
+      </div>
+      <footer class="game-footer"><span><kbd>ESC</kbd> PAUSE / MENU</span><span>YOUR CHOICES SHAPE THE CASE</span><button id="restart-game">RESTART CASE ↻</button></footer>
+    </section>
+  </main>
+
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="evidence-drawer" class="drawer" aria-label="Evidence board" aria-hidden="true"><div class="drawer-header"><div><p class="eyebrow">INVESTIGATION TOOLS</p><h2>Evidence board</h2></div><button class="modal-close" data-close-drawer aria-label="Close">×</button></div><p class="drawer-intro">Every detail matters. Select a piece of evidence to review what it could mean.</p><div id="evidence-grid" class="evidence-grid"></div><div id="empty-evidence" class="empty-state">No evidence collected yet.<br>Explore the gallery and look closely.</div><div class="board-footer"><span id="board-count">0 ITEMS COLLECTED</span><button id="accuse-from-board" class="btn btn-primary">Make an accusation <span>↗</span></button></div></aside>
+  <aside id="journal-drawer" class="drawer journal-drawer" aria-label="Case journal" aria-hidden="true"><div class="drawer-header"><div><p class="eyebrow">INVESTIGATION LOG</p><h2>Case journal</h2></div><button class="modal-close" data-close-drawer aria-label="Close">×</button></div><p class="drawer-intro">A record of the places you have visited and the people you have spoken to.</p><div id="journal-content" class="journal-content"></div></aside>
+  <div id="dialog-backdrop" class="modal-backdrop" hidden><section id="dialog" class="modal game-modal" role="dialog" aria-modal="true"></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="game.js"></script>
+</body>
+</html>
